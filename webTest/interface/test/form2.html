@@ -1,0 +1,122 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>test case</title>
+    <link rel="stylesheet" href="../style1.css" type="text/css">
+    <link rel="stylesheet" href="../style2.css" type="text/css">
+    <link rel="stylesheet" href="../style3.css" type="text/css">
+
+</head>
+<body>
+<div class="grid-container">
+    <div class="grid-container-nav-top">
+        <div class="grid-container-nav-top-logo">
+            <div class="menu1">
+                <nav>
+                    <ul>
+                        <li><a href="#"><img src="../resources/images/phoenix0.png" id="logo"></a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+        <div class="grid-container-nav-top-menu">
+            <div class="menu">
+                <nav>
+                    <ul>
+                        <li><a href="#">Home</a></li>
+                        <li><a href="#">About</a></li>
+                        <li><a href="#">Contact</a> </li>
+                        <li><a href="#">Logout</a> </li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+
+    </div>
+    <div class="grid-container-nav-bottom">
+        <div class="grid-container-left sidenav">
+            <ul class="sidebar">
+                <li class="sidebar-item"><a class="sidebar-link" href="#">Home</a></li>
+                <li class="sidebar-item"><a class="sidebar-link" href="#">element1</a></li>
+                <li class="sidebar-item"><a class="sidebar-link" href="#">element2</a></li>
+                <li class="sidebar-item"><a class="sidebar-link" href="#">element3</a></li>
+                <li class="sidebar-item"><a class="sidebar-link" href="#">element4</a></li>
+                <li class="sidebar-item"><a class="sidebar-link" href="#">element5</a></li>
+                <li class="sidebar-item"><a class="sidebar-link" href="#">element6</a></li>
+                <li class="sidebar-item"><a class="sidebar-link" href="#">element7</a></li>
+            </ul>
+        </div>
+        <div class="grid-container-right">
+            <div class="detailform">
+                <form method="post" action="#">
+                    <div class="form-row mb-4">
+                        <div class="col">
+                            <label for="myLevel">Level:</label>
+                            <select name="level" id="myLevel">
+                                <option value="" disabled selected hidden>Select a stream</option>
+                                <option value="form1">Form 1</option>
+                                <option value="form2">Form 2</option>
+                                <option value="form3">Form 3</option>
+                                <option value="form4">Form 4</option>
+                            </select>
+                        </div>
+                        <div class="col">
+                            <label for="myClass">Class:</label>
+                            <select id="myclass" name="stream">
+                                <option value="" disabled selected hidden>Select a class</option>
+                                <option value="A">A</option>
+                                <option value="D">D</option>
+                                <option value="K">K</option>
+                                <option value="L">L</option>
+                                <option value="M">M</option>
+                                <option value="S">S</option>
+                                <option value="T">T</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-row mb-4">
+                        <div class="col">
+                            <label for="mySubject">Subjects</label>
+                            <select id="mySubject" name="subject">
+                                <option value="" disabled selected hidden>Select a subject</option>
+                                <option value="eng">English</option>
+                                <option value="kisw">Kiswahili</option>
+                                <option value="math">Mathematics</option>
+                                <option value="bio">Biology</option>
+                                <option value="chem">Chemistry</option>
+                                <option value="phys">Physics</option>
+                                <option value="histo">History</option>
+                                <option value="geo">Geography</option>
+                                <option value="cre">CRE</option>
+                                <option value="buss">Business</option>
+                                <option value="a/d">Art and Design</option>
+                                <option value="d/d">Drawing and Design</option>
+                                <option value="agrics">Agriculture</option>
+                                <option value="music">Music</option>
+                                <option value="comps">Computer Studies</option>
+                                <option value="french">French Language</option>
+                            </select>
+                        </div>
+                        <div class="col">
+                            <label for="subjTeacher">Teacher</label>
+                            <select name="teacher" id="subjTeacher">
+                                <option value="" disabled selected hidden>Subject teacher</option>
+                                <option value="">provided</option>
+                            </select>
+                        </div>
+                    </div>
+
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="grid-container-footer">
+        <p id="dateView"></p>
+    </div>
+</div>
+<script src="../javascrip.js"></script>
+</body>
+</html>

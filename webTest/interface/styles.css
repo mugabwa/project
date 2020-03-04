@@ -1,0 +1,156 @@
+body{
+    background-image: url("resources/images/bgimage3.png");
+    font-family: "Lato", sans-serif;
+}
+
+
+.sidebar-link{
+    text-decoration: none;
+    color: #000000;
+    font-family: Arial;
+    font-size: 20px;
+    padding: 5px 5px 3px 5px;
+    display: block;
+    border: 1px solid rgba(100,100,100,0.3);
+
+}
+.sidebar-link:hover{
+    color: #fefefe;
+    text-decoration: blink;
+}
+.sidebar-item{
+    list-style: none;
+    width: 90%;
+}
+.sidebar-item:hover{
+    background: #454d55;
+}
+#toggle_nav{
+    /*display: inline-block;*/
+    height: auto;
+    width: 200px;
+    position: relative;
+    z-index: 1;
+    left: 0;
+    background-color: #1d2124;
+    overflow-x: hidden;
+    padding-top: 20px;
+}
+
+.toggle_btn{
+    border: 1px solid rgba(100,100,100,0.5);
+    width: 45px;
+    display: inline-block;
+    position: relative;
+    left: 50px;
+}
+#toggle_nav a{
+    text-decoration: none;
+    color: #9fcdff;
+    font-size: 20px;
+    padding-left: 10px;
+}
+
+
+.sidebar{
+    /*margin-top: -20px;*/
+    padding-left: 10px;
+    width: 200px;
+}
+
+@media screen and (max-width: 990px){
+    .sidebar-container{padding-top: 15px;}
+    .sidebar-link{font-size: 18px;}
+    #sidebar_main{
+        position: absolute;
+        z-index: 1;
+        background: #95999c;
+        /*margin-top: -20px;*/
+        width: 200px;
+    }
+    #loginform{
+        margin: 20px;
+        padding: 20px;
+        max-width: 600px;
+        position: relative;
+        z-index: 0;
+    }
+
+}
+@media screen and (min-width: 990px){
+    #sidebar_main{
+        width: 220px;
+        background: #95999c;
+    }
+    .grid-container{
+        display: grid;
+        grid-template-columns: 20% auto auto auto;
+        padding-top: 0px;
+        padding-bottom: 0px;
+        padding-left: 0px;
+        padding-right: 10px;
+
+    }
+    .grid-item{
+        padding: 20px;
+        font-size: 30px;
+        text-align: center;
+        /*grid-column: 2/;*/
+        /*width: 80%;*/
+    }
+    .grid-item1{
+        grid-column: 2/5;
+    }
+
+}
+
+#loginform a{
+    text-decoration: none;
+}
+#loginform{
+    margin: 20px;
+    border-radius: 10px;
+    border: 1px solid #171a1d;
+    background: #9fcdaf;
+}
+.signupform{
+    margin: 20px;
+    border-radius: 10px;
+    border: 1px solid #171a1d;
+    background: #9fcdaf;
+}
+.detailform{
+    margin: 20px;
+    padding: 20px;
+    border-radius: 10px;
+    border: 1px solid #171a1d;
+    background: #9fcdaf;
+    overflow: hidden;
+}
+#myLevel, #myclass, #mySubject, #subjTeacher, #term{
+    border: 1px solid #1b1e21;
+    border-radius: .25em;
+    min-width: auto;
+    overflow: hidden;
+}
+#exam_type, #examdate, #exam_name{
+    border-radius: .25em;
+    border: #1b1e21;
+    overflow-x: hidden;
+    padding-left: 5px;
+}
+#formGender{
+    display: inline-flex;
+    width: 100%;
+    height: calc(1.5em + .75rem + 2px);
+    padding: .375rem .75rem;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #495057;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 1px solid #ced4da;
+    border-radius: .25rem;
+    transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+}

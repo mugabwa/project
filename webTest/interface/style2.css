@@ -1,0 +1,72 @@
+.menu nav ul li a, .menu1 nav ul li a{
+     text-decoration: none;
+     color: rgba(255,255,255, 0.5);
+    font-size: 25px;
+ }
+.menu nav ul li a:hover{
+    color: rgba(255,255,255, 1);
+
+}
+.menu nav ul li:hover{
+    background: #000000;
+    color: rgba(255,255,255, 1);
+}
+ul li, .menu nav ul li, .menu1 nav ul li{
+    list-style: none;
+}
+
+.grid-container-nav-top-menu .menu ul li{
+    display: inline-flex;
+    padding: 5px 10px 0px 10px;
+}
+#logo{
+    height: 45px;
+    width: 100%;
+    background: #1b1e21;
+    margin: 0;
+}
+#logo:hover{
+    background: #000000;
+}
+.menu ul{
+    padding: 2px;
+    margin: 0px 0px 0px 10px;
+}
+.menu1 ul{
+    margin: 0;
+    padding: 2px;
+}
+#dateView{
+    padding: 10px;
+}
+.principalImage{
+    height: 260px;
+    width: 260px;
+    background: #1b1e21;
+}
+.principal p{
+    text-align: center;
+}
+.princState{
+    padding: 5px;
+}
+.grid-container-left-bottom ul li{
+    background: #7abaff;
+    font-size: 20px;
+    display: inline-block;
+    border: 1px solid #171a1d;
+    border-radius: .5em;
+    padding: 5px 50px;
+    margin: 2% 6%;
+}
+.grid-container-left-bottom ul li:hover{
+    background: #007bff;
+}
+.grid-container-left-bottom ul li a{
+    color: #000000;
+    text-decoration: none;
+}
+#homeStatement{
+    font-size: 20px;
+    padding: 10px;
+}
