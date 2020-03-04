@@ -45,22 +45,25 @@ session_start();
     <div class="grid-container-nav-bottom">
         <div class="grid-container-left sidenav">
             <ul class="sidebar">
-                <li class="sidebar-item"><a class="sidebar-link" href="home.php">Home</a></li>
-                <li class="sidebar-item"><a class="sidebar-link" href="#">element1</a></li>
-                <li class="sidebar-item"><a class="sidebar-link" href="#">element2</a></li>
-                <li class="sidebar-item"><a class="sidebar-link" href="#">element3</a></li>
-                <li class="sidebar-item"><a class="sidebar-link" href="#">element4</a></li>
-                <li class="sidebar-item"><a class="sidebar-link" href="#">element5</a></li>
-                <li class="sidebar-item"><a class="sidebar-link" href="#">element6</a></li>
-                <li class="sidebar-item"><a class="sidebar-link" href="#">element7</a></li>
-            </ul>
+                <hr>
+                <li class="sidebar-item"><a class="sidebar-link" href="examDetails.php">Results</a></li>
+                <hr>
+                <li class="sidebar-item"><a class="sidebar-link" href="#">Student Score</a></li>
+                <hr>
+                <li class="sidebar-item"><a class="sidebar-link" href="#">Class Score</a></li>
+                <hr>
+<!--                <li class="sidebar-item"><a class="sidebar-link" href="#">element3</a></li>-->
+<!--                <li class="sidebar-item"><a class="sidebar-link" href="#">element4</a></li>-->
+<!--                <li class="sidebar-item"><a class="sidebar-link" href="#">element5</a></li>-->
+<!--                <li class="sidebar-item"><a class="sidebar-link" href="#">element6</a></li>-->
+<!--                <li class="sidebar-item"><a class="sidebar-link" href="#">element7</a></li>-->
+<!--            </ul>-->
         </div>
         <div class="grid-container-right">
 
             <?php
             echo sprintf("Welcome %s %s", $_SESSION['fname'], $_SESSION['lname'])."<br>";
             ?>
-
 
         </div>
     </div>

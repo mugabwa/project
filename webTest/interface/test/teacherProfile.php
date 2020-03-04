@@ -11,9 +11,10 @@ session_start();
     <link rel="stylesheet" href="../style1.css" type="text/css">
     <link rel="stylesheet" href="../style2.css" type="text/css">
     <link rel="stylesheet" href="../style3.css" type="text/css">
+<!--    <script src="../javascrip.js"></script>-->
 
 </head>
-<body>
+<body onload="loadProf()">
 <div class="grid-container">
     <div class="grid-container-nav-top">
         <div class="grid-container-nav-top-logo">
@@ -46,30 +47,39 @@ session_start();
     <div class="grid-container-nav-bottom extented1">
         <div class="extented">
             <h2>Professional Details</h2>
+            <hr>
             <div class="profile">
                 <img src="../resources/images/mother-with-daughter.jpg" class="profile-image">
             </div>
             <div>
                 <?php
                 $mydetails = details($_SESSION['userId']);
-                echo sprintf("<p>NAME: %s %s</p>",$mydetails['firstName'], $mydetails['lastName']);
+                echo sprintf("<p><strong>NAME:</strong> %s %s</p>",$mydetails['firstName'], $mydetails['lastName']);
+                echo sprintf("<p><strong>USERNAME:</strong> %s</p>",$mydetails['username']);
+                echo sprintf("<p><strong>AGE:</strong> %s</p>",$mydetails['DoB']);
+                echo sprintf("<p><strong>GENDER:</strong> %s</p>",$mydetails['gender']);
+                echo sprintf("<p><strong>CONTACT:</strong> %s</p>",$mydetails['contacts']);
                 ?>
-<!--                <h4>NAME: </h4>-->
-                <h4>USERNAME: </h4>
-                <h4>AGE: </h4>
-                <h4>GENDER: </h4>
-                <h4>CONTACT: </h4>
             </div>
+            <hr>
 
         </div>
-        <div class="grid-container-right">
+        <div class="grid-container-right profile-text">
 
             <?php
-            echo sprintf("Welcome %s %s", $_SESSION['fname'], $_SESSION['lname'])."<br>";
-
+//            echo sprintf("Welcome %s %s", $_SESSION['fname'], $_SESSION['lname'])."<br>";
             ?>
-
-
+            <h2>About Me</h2>
+            <hr>
+            <div>
+                <p id="teacherProfile"></p>
+            </div>
+            <h2>Details</h2>
+            <hr>
+            <p><strong>Subjects taught:</strong></p>
+            <p><strong>Classes:</strong></p>
+            <p><strong>Role:</strong></p>
+            <p><strong>Professional Details:</strong></p>
         </div>
     </div>
     <div class="grid-container-footer">

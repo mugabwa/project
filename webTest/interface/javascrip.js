@@ -11,7 +11,7 @@ var date = 0;
 date=displayDate();
 document.getElementById('dateView').innerHTML = date;
 
-
+ //ajax
 function  loadDoc() {
     var xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function () {
@@ -42,15 +42,27 @@ var span = document.getElementsByClassName("close")[0];
 //open action
 btn.onclick = function () {
     modal.style.display = "block";
-}
+};
 //close action
 span.onclick = function () {
     modal.style.display = "none";
-}
+};
 
 //when the button is clicked.
 window.onclick = function (event) {
     if (event.target == modal){
         modal.style.display = "none";
     }
+};
+
+//ajax
+function  loadProf() {
+    var xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function () {
+        if (this.readyState === 4 && this.status === 200){
+            document.getElementById("teacherProfile").innerHTML = this.responseText;
+        }
+    };
+    xhttp.open("GET","../ajax/harry.txt", true);
+    xhttp.send();
 }
