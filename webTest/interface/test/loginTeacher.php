@@ -65,54 +65,42 @@ if(!session_start()){
         </div>
 
     </div>
-    <div class="grid-container-nav-bottom">
-        <div class="grid-container-left sidenav">
-            <ul class="sidebar">
-                <li class="sidebar-item"><a class="sidebar-link" href="home.php">Home</a></li>
-                <li class="sidebar-item"><a class="sidebar-link" href="#">element1</a></li>
-                <li class="sidebar-item"><a class="sidebar-link" href="#">element2</a></li>
-                <li class="sidebar-item"><a class="sidebar-link" href="#">element3</a></li>
-                <li class="sidebar-item"><a class="sidebar-link" href="#">element4</a></li>
-                <li class="sidebar-item"><a class="sidebar-link" href="#">element5</a></li>
-                <li class="sidebar-item"><a class="sidebar-link" href="#">element6</a></li>
-                <li class="sidebar-item"><a class="sidebar-link" href="#">element7</a></li>
-            </ul>
-        </div>
-        <div class="grid-container-right">
-            <div class="loginForm">
-                <div class="form-head">Login<hr></div>
-                <?php
-                if(isset($_SESSION["errorMessage"])) {
-                    ?>
-                    <div class="error-message">
-                        <?php
-                        echo $_SESSION["errorMessage"];
-                        ?>
-                    </div>
-                    <?php
-                    unset($_SESSION["errorMessage"]);
-                }
+    <div class="grid-container-nav-bottom2">
+        <div class="loginForm">
+            <span>Teacher Login</span>
+            <hr>
+            <?php
+            if(isset($_SESSION["errorMessage"])) {
                 ?>
-                <form method="post" action="../../phpfile/signup.php">
-                    <div class="form-group">
-                        <label for="username">Username</label>
-                        <input type="text" name="uname" id="username" class="form-control" placeholder="Username">
-                    </div>
-                    <div class="form-group">
-                        <label for="passwd">Password</label>
-                        <input type="password" name="pass" id="passwd" class="form-control" placeholder="Password">
-                    </div>
-                    <div class="form-group">
-                        <input class="btn btn-primary" type="submit" name="teacherLogin" value="SUBMIT">
-                    </div>
-                </form>
+                <div class="error-message">
+                    <?php
+                    echo $_SESSION["errorMessage"];
+                    ?>
+                </div>
+                <?php
+                unset($_SESSION["errorMessage"]);
+            }
+            ?>
+            <form method="post" action="../../phpfile/signup.php">
+                <div class="form-group">
+                    <label for="username">Username</label>
+                    <input type="text" name="uname" id="username" class="form-control" placeholder="Username">
+                </div>
+                <div class="form-group">
+                    <label for="passwd">Password</label>
+                    <input type="password" name="pass" id="passwd" class="form-control" placeholder="Password">
+                </div>
+                <div class="form-group">
+                    <input class="btn btn-primary" type="submit" name="teacherLogin" value="SUBMIT">
+                </div>
+            </form>
 
-                <a href="#">Forgot password?</a>
-                <br>
-                <a href="#">Don't have an account?</a>
-            </div>
-
+            <a href="#">Forgot password?</a>
+            <br>
+            <a href="#">Don't have an account?</a>
         </div>
+
+
     </div>
     <div class="grid-container-footer">
         <p id="dateView"></p>

@@ -1,3 +1,8 @@
+<?php
+require_once '../../phpfile/teacher.php';
+session_start();
+if(empty($_SESSION)) header("Location: loginTeacher.php");
+?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -17,7 +22,7 @@
             <div class="menu1">
                 <nav>
                     <ul>
-                        <li><a href="#"><img src="../resources/images/phoenix0.png" id="logo"></a></li>
+                        <li><a href="#"><img src="../resources/images/phoenix0.png" id="logo" alt="logo"></a></li>
                     </ul>
                 </nav>
             </div>
@@ -29,7 +34,9 @@
                         <li><a href="#">Home</a></li>
                         <li><a href="#">About</a></li>
                         <li><a href="#">Contact</a> </li>
-                        <li><a href="#">Logout</a> </li>
+                        <li><form method="post" action="../../phpfile/signup.php">
+                                <button class="btn" name="logout">Logout</button>
+                            </form></li>
                     </ul>
                 </nav>
             </div>
@@ -51,20 +58,20 @@
         </div>
         <div class="grid-container-right">
             <div class="detailform">
-                <form method="post" action="#">
+                <form method="post" action="../../phpfile/teacher.php">
                     <div class="form-row mb-4">
                         <div class="col">
                             <label for="myLevel">Level:</label>
                             <select name="level" id="myLevel">
                                 <option value="" disabled selected hidden>Select a stream</option>
-                                <option value="form1">Form 1</option>
-                                <option value="form2">Form 2</option>
-                                <option value="form3">Form 3</option>
-                                <option value="form4">Form 4</option>
+                                <option value="1">Form 1</option>
+                                <option value="2">Form 2</option>
+                                <option value="3">Form 3</option>
+                                <option value="4">Form 4</option>
                             </select>
                         </div>
                         <div class="col">
-                            <label for="myClass">Class:</label>
+                            <label for="myclass">Class:</label>
                             <select id="myclass" name="stream">
                                 <option value="" disabled selected hidden>Select a class</option>
                                 <option value="A">A</option>
@@ -119,7 +126,12 @@
                         </div>
                         <div>
                             <label for="exam_type">Exam type:</label>
-                            <input type="text" name="examtype" id="exam_type" placeholder="Enter exam type">
+                            <select name="examtype" id="exam_type">
+                                <option value="" disabled selected hidden>Select exam type</option>
+                                <option value="Entry">Entry</option>
+                                <option value="Midterm">Midterm</option>
+                                <option value="End term">End term</option>
+                            </select>
                         </div>
                     </div>
                     <div class="form-row mb-4">

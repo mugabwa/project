@@ -21,7 +21,7 @@ if(!session_start()){
     <link rel="stylesheet" href="../style3.css" type="text/css">
 
 </head>
-<body>
+<body  >
 <div class="grid-container">
     <div class="grid-container-nav-top">
         <div class="grid-container-nav-top-logo">
@@ -66,39 +66,39 @@ if(!session_start()){
 
     </div>
     <div class="grid-container-nav-bottom2">
-        <div class="loginForm">
-            <span>Parent Login</span>
-            <hr>
-            <?php
-            if(isset($_SESSION["errorMessage"])) {
-                ?>
-                <div class="error-message">
-                    <?php
-                    echo $_SESSION["errorMessage"];
-                    ?>
-                </div>
+            <div class="loginForm">
+                <span>Admin Login</span>
+                <hr>
                 <?php
-                unset($_SESSION["errorMessage"]);
-            }
-            ?>
-            <form method="post" action="../../phpfile/signup.php">
-                <div class="form-group">
-                    <label for="username">Username</label>
-                    <input type="text" name="uname" id="username" class="form-control" placeholder="Username">
-                </div>
-                <div class="form-group">
-                    <label for="passwd">Password</label>
-                    <input type="password" name="pass" id="passwd" class="form-control" placeholder="Password">
-                </div>
-                <div class="form-group">
-                    <input class="btn btn-primary" type="submit" name="parentLogin" value="SUBMIT">
-                </div>
-            </form>
+                if(isset($_SESSION["errorMessage"])) {
+                    ?>
+                    <div class="error-message">
+                        <?php
+                        echo $_SESSION["errorMessage"];
+                        ?>
+                    </div>
+                    <?php
+                    unset($_SESSION["errorMessage"]);
+                }
+                ?>
+                <form method="post" action="../../phpfile/signup.php">
+                    <div class="form-group">
+                        <label for="username">Username</label>
+                        <input type="text" name="uname" id="username" class="form-control" placeholder="Username">
+                    </div>
+                    <div class="form-group">
+                        <label for="passwd">Password</label>
+                        <input type="password" name="pass" id="passwd" class="form-control" placeholder="Password">
+                    </div>
+                    <div class="form-group">
+                        <input class="btn btn-primary" type="submit" name="adminLogin" value="SUBMIT">
+                    </div>
+                </form>
 
-            <a href="#">Forgot password?</a>
-            <br>
-            <a href="#">Don't have an account?</a>
-        </div>
+                <a href="#">Forgot password?</a>
+                <br>
+                <a href="#">Don't have an account?</a>
+            </div>
 
 
     </div>

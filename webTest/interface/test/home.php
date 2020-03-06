@@ -44,16 +44,17 @@
                                     <a href="loginTeacher.php">Teacher</a>
                                 </div>
                             </div>
-                        <li>
-                            <div class="dropdown">
-                                <button class="dropbtn">Signup</button>
-                                <div class="dropdown-content">
-                                    <a href="studentSignup.html">Student</a>
-                                    <a href="parentSignup.html">Parent</a>
-                                    <a href="teacherSignup.html">Teacher</a>
-                                </div>
-                            </div>
-                             </li>
+                        <li><a href="register.php">Register</a></li>
+<!--                        <li>-->
+<!--                            <div class="dropdown">-->
+<!--                                <button class="dropbtn">Signup</button>-->
+<!--                                <div class="dropdown-content">-->
+<!--                                    <a href="studentSignup.html">Student</a>-->
+<!--                                    <a href="parentSignup.html">Parent</a>-->
+<!--                                    <a href="teacherSignup.html">Teacher</a>-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                             </li>-->
                     </ul>
                 </nav>
             </div>

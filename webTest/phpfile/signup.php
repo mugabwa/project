@@ -61,12 +61,13 @@ $conn = $dbConn->connect();
     }
 
 
-
 //    logout
 if (isset($_POST['logout'])){
     session_start();
     unset($_SESSION['userId']);
     unset($_SESSION['uname']);
+    session_unset();
+    session_destroy();
     header("Location:../interface/test/home.php");
 }
 
@@ -145,5 +146,7 @@ function logout1(){
 //    }
     unset($_SESSION['userId']);
     unset($_SESSION['uname']);
+    session_unset();
+    session_destroy();
 //    header("Location:../interface/test/home.php");
 }

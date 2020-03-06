@@ -66,3 +66,4 @@ function  loadProf() {
     xhttp.open("GET","../ajax/harry.txt", true);
     xhttp.send();
 }
+

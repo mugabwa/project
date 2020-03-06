@@ -58,6 +58,14 @@ class DBConnector
         return $insertId;
     }
 
+    public function update($query, $paramType, $paramArray){
+        $stmt = $this->dbHandler->prepare($query);
+        if(!empty($paramType)&&!empty($paramArray)){
+            $this->bindQueryParams($stmt,$paramType,$paramArray);
+        }
+        return $stmt->execute();
+    }
+
     public function execute($query, $paramType, $paramArray){
         $stmt = $this->dbHandler->prepare($query);
         if(!empty($paramType)&&!empty($paramArray)){

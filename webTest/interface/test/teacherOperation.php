@@ -1,6 +1,7 @@
 <?php
 require_once '../../phpfile/teacher.php';
 session_start();
+if(empty($_SESSION)) header("Location: loginTeacher.php");
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -35,7 +36,6 @@ session_start();
                         <li><form method="post" action="../../phpfile/signup.php">
                             <button class="btn" name="logout">Logout</button>
                             </form></li>
-                        </form>
                     </ul>
                 </nav>
             </div>
