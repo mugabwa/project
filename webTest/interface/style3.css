@@ -60,6 +60,7 @@ body{
     max-width: 100%;
     padding: 20px;
     margin: 20px;
+    background: #00ced154;
 }
 .signupform table, .signupform table tbody tr{
     border-collapse: collapse;
@@ -75,6 +76,7 @@ td{
     padding: 5px;
     width: 100px;
     font-size: 18px;
+    background: #a9a9a97a;
 }
 .signupform table thead{
     background: #0f6674;
@@ -232,6 +234,7 @@ select{
     float: right;
     font-size: 28px;
     font-weight: bold;
+    cursor: pointer;
 }
 .close:hover{
     color: #000;

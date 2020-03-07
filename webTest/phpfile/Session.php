@@ -9,50 +9,41 @@ class LoginSession
         require_once "Classes.php";
         $this->ds = new DBConnector();
     }
-    function getMemberById($memberId){
+    private function selectQuery($value, $type, $memberArr){
+        $query = $value;
+        $paramType = $type;
+        $paramArray = $memberArr;
+        return $this->ds->select($query,$paramType,$paramArray);
+    }
+
+    public function getMemberById($memberId){
         if ($_SESSION["type"] == "Student"){
             $query="SELECT * FROM student_info WHERE studentID = ?;";
-            $paramType = "i";
-            $paramArray = array($memberId);
-            $memberResult = $this->ds->select($query,$paramType,$paramArray);
-            return $memberResult;
+            return $this->selectQuery($query,'i',array($memberId));
         }elseif ($_SESSION["type"]=="Parent"){
             $query = "SELECT * FROM parent WHERE parentID = ?;";
-            $paramType = "i";
-            $paramArray = array($memberId);
-            $memberResult = $this->ds->select($query,$paramType,$paramArray);
-            return $memberResult;
+            return $this->selectQuery($query,'i',array($memberId));
         }elseif ($_SESSION['type'] == "Teacher"){
             $query = "SELECT * FROM teacher WHERE  teacherID = ?;";
-            $paramType = "i";
-            $paramArray = array($memberId);
-            $memberResult = $this->ds->select($query,$paramType,$paramArray);
-            return $memberResult;
+            return $this->selectQuery($query,'i',array($memberId));
+        }elseif ($_SESSION['type'] == "Admin"){
+            $query = "SELECT firstName,lastName FROM admin WHERE adminID = ?";
+            return $this->selectQuery($query,'i',array($memberId));
         }
 
     }
     public function processLogin($username,$password){
 //        $passwordHash = md5($password);
         $query = "SELECT * FROM student WHERE username = ? AND password = ?;";
-        $paramType = "ss";
-        $paramArray = array($username,$password);
-        $memberResult = $this->ds->select($query,$paramType,$paramArray);
+        $memberResult = $this->selectQuery($query,'ss',array($username,$password));
         if (!empty($memberResult)){
             $_SESSION["userId"] = $memberResult[0]["adminNo"];
-//            $query1 = "SELECT firstName,lastName FROM student_info WHERE studentID = ?";
-//            $paramType1 = "i";
-//            $paramArray1 = array($memberResult[0]["adminNo"]);
-//            $result = $this->ds->select($query1,$paramType1,$paramArray1);
-//            $_SESSION['fname'] = $result[0]["firstName"];
-//            $_SESSION['lname'] = $result[0]["lastName"];
             return true;
         }
     }
     public function processParentlog($username,$password){
         $query = "SELECT * FROM parent WHERE username = ? AND password = ?;";
-        $paramType = "ss";
-        $paramArray = array($username,$password);
-        $memberResult = $this->ds->select($query,$paramType,$paramArray);
+        $memberResult = $this->selectQuery($query,'ss',array($username,$password));
         if(!empty($memberResult)){
             $_SESSION["userId"] = $memberResult[0]["parentID"];
             return true;
@@ -60,9 +51,15 @@ class LoginSession
     }
     public function processTeacherlog($username,$password){
         $query = "SELECT * FROM teacher WHERE username = ? AND password = ?;";
-        $paramType = "ss";
-        $paramArray = array($username,$password);
-        $memberResult = $this->ds->select($query,$paramType,$paramArray);
+        $memberResult = $this->selectQuery($query,'ss',array($username,$password));
+        if (!empty($memberResult)){
+            $_SESSION['userId'] = $memberResult[0]['teacherID'];
+            return true;
+        }
+    }
+    public function processAdminlog($username,$password){
+        $query = "SELECT * FROM admin WHERE username = ? AND pword = ?;";
+        $memberResult = $this->selectQuery($query,'ss',array($username,$password));
         if (!empty($memberResult)){
             $_SESSION['userId'] = $memberResult[0]['teacherID'];
             return true;

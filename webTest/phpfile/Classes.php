@@ -126,6 +126,40 @@ class Person{
     }
 }
 
+class Admin extends Person{
+    private $role;
+    private $birth;
+    public function __construct()
+    {
+        parent::__construct();
+        $this->role = 'admin';
+        $this->birth = date('Y/m/d');
+    }
+    public function getValues($connector,$fname,$lname,$sex,$user,$pass,$rol,$birth){
+        $this->role = mysqli_real_escape_string($connector,$_POST[$rol]);
+        $this->gender = mysqli_real_escape_string($connector,$_POST[$sex]);
+        $this->password = mysqli_real_escape_string($connector,$_POST[$pass]);
+        $this->lastName = mysqli_real_escape_string($connector,$_POST[$lname]);
+        $this->firstName = mysqli_real_escape_string($connector,$_POST[$fname]);
+        $this->username = mysqli_real_escape_string($connector,$_POST[$user]);
+        $this-> birth = mysqli_real_escape_string($connector,$_POST[$birth]);
+        $this->innerConver();
+        $this->uploadData();
+    }
+    private function uploadData(){
+        $query = "INSERT INTO admin (firstName,lastName,username,pword,birthDate,gender,role) VALUES (?,?,?,?,?,?,?)";
+        $paramType = "sssssis";
+        $paramArray = array($this->firstName,$this->lastName,$this->username,$this->password,$this->birth,$this->gender,$this->role);
+        $result = $this->myconnect->insert($query,$paramType,$paramArray);
+        if (!empty($result)){
+            header("Location: ../interface/test/register.php?New recorded created successfully");
+        }else{
+            header("Location: ../interface/test/addAdmin.php?failed");
+        }
+    }
+
+}
+
 class Student extends Person{
     private $regNo;
 

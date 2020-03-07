@@ -97,7 +97,7 @@ if(!session_start()){
 
                 <a href="#">Forgot password?</a>
                 <br>
-                <a href="#">Don't have an account?</a>
+                <a href="addAdmin.php">Don't have an account?</a>
             </div>
 
 
