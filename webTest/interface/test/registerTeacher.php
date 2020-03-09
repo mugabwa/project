@@ -1,3 +1,7 @@
+<?php
+session_start();
+if(empty($_SESSION)) header("Location: register.php");
+?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -65,9 +69,9 @@
                     <?php
                     include "../../phpfile/Classes.php";
                     include "../../phpfile/teacher.php";
-                    $student = new DBConnector();
-                    $query = "SELECT firstName,lastName,username,gender,contacts,last_logged FROM parent;";
-                    $result=$student->select($query);
+                    $teacher = new DBConnector();
+                    $query = "SELECT firstName,lastName,username,gender,DoB,contacts,last_logged FROM teacher;";
+                    $result=$teacher->select($query);
                     $arraySize = sizeof($result);
 
                     foreach ($result as $array){
@@ -114,15 +118,79 @@
 
             <div class="form-row">
                 <input name="phone" type="tel" class="mb-4 form-control" placeholder="Phone Number" style="margin-right: 10px;">
-                <input name="adminNo" type="text" class="mb-4 form-control" placeholder="Student's admission number">
+                <input name="birth" type="date" placeholder="Date of Birth" class="mb-4 form-control" type="text" onfocus="(this.type='date')"
+                       onmouseover="(this.type='date')" onmouseout="(this.type='text')">
 
             </div>
-            <select name="gender" class="mb-4">
-                <!--                Male is represented by true while female with false-->
-                <option value="" disabled selected hidden>Select the Gender</option>
-                <option value="1" >Male</option>
-                <option value="0" >Female</option>
-            </select>
+            <div class="form-row">
+                <select name="gender" class="mb-4">
+                    <!--                Male is represented by true while female with false-->
+                    <option value="" disabled selected hidden>Select the Gender</option>
+                    <option value="1" >Male</option>
+                    <option value="0" >Female</option>
+                </select>
+                <select name="subject" class="mb-4">
+                    <option value="" disabled selected hidden>Select a subject</option>
+                    <option value="102">English</option>
+                    <option value="103">Kiswahili</option>
+                    <option value="101">Mathematics</option>
+                    <option value="104">Biology</option>
+                    <option value="106">Chemistry</option>
+                    <option value="105">Physics</option>
+                    <option value="107">History</option>
+                    <option value="108">Geography</option>
+                    <option value="109">CRE</option>
+                    <option value="110">Business</option>
+                    <option value="111">Art and Design</option>
+                    <option value="112">Drawing and Design</option>
+                    <option value="113">Agriculture</option>
+                    <option value="114">Music</option>
+                    <option value="115">Computer Studies</option>
+                    <option value="116">French Language</option>
+                </select>
+            </div>
+            <div class="form-row">
+                <select name="classTaught" class="mb-4">
+                    <option>1A</option>
+                    <option>1D</option>
+                    <option>1K</option>
+                    <option>1L</option>
+                    <option>1M</option>
+                    <option>1N</option>
+                    <option>1S</option>
+                    <option>1T</option>
+                    <option>2A</option>
+                    <option>2D</option>
+                    <option>2K</option>
+                    <option>2L</option>
+                    <option>2M</option>
+                    <option>2N</option>
+                    <option>2S</option>
+                    <option>2T</option>
+                    <option>3A</option>
+                    <option>3D</option>
+                    <option>3K</option>
+                    <option>3L</option>
+                    <option>3M</option>
+                    <option>3N</option>
+                    <option>3S</option>
+                    <option>3T</option>
+                    <option>4A</option>
+                    <option>4D</option>
+                    <option>4K</option>
+                    <option>4L</option>
+                    <option>4M</option>
+                    <option>4N</option>
+                    <option>4S</option>
+                    <option>4T</option>
+                </select>
+                <select name="role" class="mb-4">
+                    <option value="" disabled selected hidden>Select role played</option>
+                    <option value="classTeacher">Class Teacher</option>
+                    <option value="subjectTeacher">Subject Teacher</option>
+                </select>
+            </div>
+
             <br>
             <input class="btn" type="submit" name="regParent" value="Register">
         </form>

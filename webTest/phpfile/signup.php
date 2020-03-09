@@ -17,9 +17,9 @@ $conn = $dbConn->connect();
         sort($myarray);
         print_r($myarray);
     }
-    if(isset($_POST['teacherSignup'])){
+    if(isset($_POST['regTeacher'])){
         $teacher = new Teacher();
-        $teacher->getValues($conn, 'fname', 'lname', 'sex', 'uname', 'pword',
+        $teacher->getValues($conn, 'fname', 'lname', 'gender', 'uname', 'pword',
             'phone', 'birth');
     }
     //Administrator signup interface

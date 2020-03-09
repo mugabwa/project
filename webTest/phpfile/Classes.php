@@ -311,7 +311,7 @@ class Teacher extends Person{
         $this->gender = mysqli_real_escape_string($connector,$_POST[$sex]);
         $this->phone = mysqli_real_escape_string($connector,$_POST[$contact]);
         $this->birthDate = mysqli_real_escape_string($connector, $_POST[$birth]);
-        $this->innerConver();
+//        $this->innerConver();
         $this->setDetails();
     }
     private function setDetails(){
@@ -322,9 +322,12 @@ class Teacher extends Person{
             $this->birthDate,$this->gender,$this->phone,$curDate);
         $result = $this->myconnect->insert($query,$paramType,$paramArray);
         if(!empty($result)){
-            header("Location: ../interface/test/loginTeacher.php?success");
+            header("Location: ../interface/test/registerTeacher.php?success");
         }else{
-            header("Location: ../interface/test/teacherSignup.html?failed");
+            header("Location: ../interface/test/registerTeacher.php?failed");
         }
+    }
+    private function setSubject($teacherID){
+
     }
 }
