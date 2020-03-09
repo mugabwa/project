@@ -3,16 +3,19 @@ include_once 'Classes.php';
 $dbConn = new DBConnector();
 $conn = $dbConn->connect();
 
-    if(isset($_POST['studentSignup'])){
+    if(isset($_POST['regStudent'])){
         $student = new Student();
         $student->getValues($conn,'fname','lname',
-            'sex','uname','pword','adminNo');
+            'gender','uname','pword','admindate','DoB','class');
 
     }
-    if(isset($_POST['parentSignup'])){
+    if(isset($_POST['regParent'])){
         $parent = new StudentParent();
-        $parent->getValues($conn,'fname','lname','sex','uname','pword',
-            'adminNo','phone','sfname','slname');
+        $parent->getValues($conn,'fname','lname','gender','uname','pword','phone','adminNo');
+        $myarray = $_POST['adminNo'];
+        $myarray=explode(",",$myarray);
+        sort($myarray);
+        print_r($myarray);
     }
     if(isset($_POST['teacherSignup'])){
         $teacher = new Teacher();
@@ -21,7 +24,7 @@ $conn = $dbConn->connect();
     }
     //Administrator signup interface
     if(isset($_POST['regAdmin'])){
-        $admin = new Admin();
+        $admin = new Administrator();
         $admin->getValues($conn, 'fname','lname', 'sex', 'uname', 'pword', 'role', 'birth');
     }
 

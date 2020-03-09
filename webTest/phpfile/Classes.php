@@ -126,7 +126,7 @@ class Person{
     }
 }
 
-class Admin extends Person{
+class Administrator extends Person{
     private $role;
     private $birth;
     public function __construct()
@@ -161,70 +161,73 @@ class Admin extends Person{
 }
 
 class Student extends Person{
-    private $regNo;
+    private $regDate;
+    private $class;
+    private $level;
+    private $birth;
 
     public function __construct()
     {
 
         parent::__construct();
-        $this->regNo = '12345';
+        $this->regDate = date('Y-m-d');
     }
 
-    public function getValues($connector,$fname,$lname,$sex,$user,$pass,$reg){
+    public function getValues($connector,$fname,$lname,$sex,$user,$pass,$reg,$birth,$stream){
         $this->username = mysqli_real_escape_string($connector,$_POST[$user]);
         $this->password = mysqli_real_escape_string($connector,$_POST[$pass]);
         $this->lastName = mysqli_real_escape_string($connector,$_POST[$lname]);
         $this->firstName = mysqli_real_escape_string($connector,$_POST[$fname]);
         $this->gender = mysqli_real_escape_string($connector,$_POST[$sex]);
-        $this->regNo = mysqli_real_escape_string($connector,$_POST[$reg]);
-        $this->innerConver();
+        $this->regDate = mysqli_real_escape_string($connector,$_POST[$reg]);
+        $this->birth = mysqli_real_escape_string($connector,$_POST[$birth]);
+        $this->class = mysqli_real_escape_string($connector,$_POST[$stream]);
+        $this->level = $this->getForm($this->dateExpo($this->regDate),$this->class);
+//        $this->innerConver();
         $this->validateStudent();
     }
-    public function display(){
-        echo $this->username."<br>";
-        echo $this->gender."<br>";
-        echo $this->regNo."<br>";
-        echo $this->password."<br>";
-        echo $this->lastName."<br>";
-        echo $this->firstName."<br>";
+    //return the current class from a given date
+    private function dateExpo($givenDate){
+        list($year,$month,$day) = explode("-",$givenDate);
+        $currentdate = strtotime($year . "-" . $month . "-" . $day);
+        $result = (date('Y') - date('Y',$currentdate))+200;
+        if($result>201) {
+            $result += 1;
+        }
+        return $result;
     }
-    private function insertData(){
+    //returns the formID
+    private function getForm($input,$input1){
+        $query = "SELECT streamID FROM streamLink WHERE FormID = ? and ClassID = ?;";
+        $paramType = 'ii';
+        $paramArray = array($input,$input1);
+        $result = $this->myconnect->select($query,$paramType,$paramArray);
+        return $result[0]['streamID'];
+    }
+    private function insertData($studentID){
         $curDate = date('Y/m/d');
         $query = "INSERT INTO student (username,password,last_logged,adminNo) VALUES (?,?,?,?);";
         $paramType = "sssi";
-        $paramArray = array($this->username,$this->password,$curDate,$this->regNo);
+        $paramArray = array($this->username,$this->password,$curDate,$studentID);
         $result = $this->myconnect->insert($query,$paramType,$paramArray);
         if (!empty($result)){
-            echo "New recorded created successfully";
+            header("Location: ../interface/test/registerStudent.php?New recorded created successfully");
         }else{
-            echo "Error: Values not inserted";
+            header("Location: ../interface/test/registerStudent.php?Error: Values not inserted");
         }
 
     }
     private function validateStudent(){
-        $query = "SELECT firstName,lastName,Gender FROM student_info WHERE studentID = ?";
-        $paramType = "i";
-        $paramArray = array($this->regNo);
-        $result = $this->myconnect->select($query,$paramType,$paramArray);
-        if (!empty($result)){
-            if(($result[0]['firstName']==$this->firstName)&&($result[0]['lastName']==$this->lastName)&&($result[0]['Gender']==$this->gender)){
-                $this->insertData();
-            }else{
-                if($result[0]['firstName']!=$this->firstName){
-                    echo "The student first name do not match with the ones in the school record<br>";
-                }
-                if($result[0]['lastName']!=$this->lastName){
-                    echo "The student last name do not match with the ones in the school record<br>";
-                }
-                if($result[0]['Gender']!=$this->gender){
-                    echo "The student gender do not match with the ones in the school record<br>";
-                }
-                echo "Error in insertion";
-            }
+        $query = "INSERT INTO student_info (firstName,lastName,Gender,DoB,adminDate,streamLinkID) VALUES (?,?,?,?,?,?)";
+        $paramType = "ssissi";
+        $paramArray = array($this->firstName,$this->lastName,$this->gender,$this->birth,$this->regDate,$this->level);
+        $result = $this->myconnect->insert($query,$paramType,$paramArray);
+        if (!empty($result)) {
+            $this->insertData($result);
         }else{
-            echo "<br>The record of this student does not exist!<br>";
-        }
+            header("Location: ../interface/test/registerStudent.php?Error: Values not inserted");
 
+        }
     }
 
 }
@@ -232,15 +235,15 @@ class Student extends Person{
 class StudentParent extends Person{
     private $adminNo;
     private $phone;
-    private $student;
+    private $myarray;
     public function __construct()
     {
         parent::__construct();
         $this->phone = '0700000000';
         $this->adminNo='1234';
-        $this->student = array('none','none');
+        $this->myarray = array();
     }
-    public function getValues($connector,$fname,$lname,$sex,$user,$pass,$reg,$contact,$sname1,$sname2){
+    public function getValues($connector,$fname,$lname,$sex,$user,$pass,$contact,$reg){
         $this->username = mysqli_real_escape_string($connector,$_POST[$user]);
         $this->password = mysqli_real_escape_string($connector,$_POST[$pass]);
         $this->lastName = mysqli_real_escape_string($connector,$_POST[$lname]);
@@ -248,41 +251,45 @@ class StudentParent extends Person{
         $this->gender = mysqli_real_escape_string($connector,$_POST[$sex]);
         $this->adminNo = mysqli_real_escape_string($connector,$_POST[$reg]);
         $this->phone = mysqli_real_escape_string($connector,$_POST[$contact]);
-        $this->student = array(mysqli_real_escape_string($connector,$_POST[$sname1]),mysqli_real_escape_string($connector,$_POST[$sname2]));
-        $this->innerConver();
+        $this->myarray=explode(",",$this->adminNo);
+        sort($this->myarray);
+//        $this->innerConver();
         $this->insertDetails();
     }
-    private function validateParent(){
-        $query = "SELECT firstName,lastName FROM student_info where studentID = ?";
-        $paraType = 'i';
-        $paraArray = array($this->adminNo);
-        $result = $this->myconnect->select($query,$paraType,$paraArray);
+    private function validateParent($parentID){
+        $query = "UPDATE student_info SET ParentID = ? WHERE studentID = ?;";
+        $paraType = 'ii';
+        $arrayObject = new ArrayObject($this->myarray);
+        $iterator = $arrayObject->getIterator();
+        for ($iterator; $iterator->valid(); $iterator->next()){
+            $paraArray = array($parentID,$iterator->current());
+            $result = $this->myconnect->update($query,$paraType,$paraArray);
+        }
         if(!empty($result)){
             if(($this->student[0]==$result[0]['firstName']) and ($this->student[1] ==$result[0]['lastName'])){
                 return true;
             }else{
-                header("Location: ../interface/test/parentSignup.html?failed1");
+                header("Location: ../interface/test/registerParent.php?failed1");
                 return false;
             }
         }else{
-            header("Location: ../interface/test/parentSignup.html?failed2");
+            header("Location: ../interface/test/registerParent.php?failed2");
             return false;
         }
     }
 
     private function insertDetails(){
         $curDate = date('Y/m/d');
-        if($this->validateParent()){
-            $query = "INSERT INTO parent(firstName,lastName,username,password,gender,contacts,last_logged) VALUE (?,?,?,?,?,?,?);";
-            $paraType = "sssssss";
-            $paraArray = array($this->firstName,$this->lastName,$this->username,$this->password,$this->gender,$this->phone,$curDate);
-            $result = $this->myconnect->insert($query,$paraType,$paraArray);
-            if(!empty($result)){
-                header("Location: ../interface/test/loginParent.php?success");
-            }else{
-                header("Location: ../interface/test/parentSignup.html?failed3");
+        $query = "INSERT INTO parent(firstName,lastName,username,password,gender,contacts,last_logged) VALUE (?,?,?,?,?,?,?);";
+        $paraType = "sssssss";
+        $paraArray = array($this->firstName,$this->lastName,$this->username,$this->password,$this->gender,$this->phone,$curDate);
+        $result = $this->myconnect->insert($query,$paraType,$paraArray);
+        if(!empty($result)){
+            if($this->validateParent($result)){
+                header("Location: ../interface/test/registerParent.php?success");
             }
-
+        }else{
+            header("Location: ../interface/test/registerParent.php?failed3");
         }
     }
 }

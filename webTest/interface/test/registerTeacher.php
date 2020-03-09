@@ -1,9 +1,3 @@
-<?php
-//require_once '../../phpfile/teacher.php';
-session_start();
-if(empty($_SESSION)) header("Location: register.php");
-?>
-
 
 <!DOCTYPE html>
 <html lang="en">
@@ -59,13 +53,12 @@ if(empty($_SESSION)) header("Location: register.php");
                 <table>
                     <thead>
                     <tr>
-                        <th>Admission Number</th>
                         <th>First Name</th>
                         <th>Last Name</th>
+                        <th>Username</th>
                         <th>Gender</th>
-                        <th>Date of Birth</th>
-                        <th>Date of Admission</th>
-                        <th>Class</th>
+                        <th>Phone</th>
+                        <th>Last Logged</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -73,25 +66,23 @@ if(empty($_SESSION)) header("Location: register.php");
                     include "../../phpfile/Classes.php";
                     include "../../phpfile/teacher.php";
                     $student = new DBConnector();
-                    $query = "SELECT * FROM student_info;";
+                    $query = "SELECT firstName,lastName,username,gender,contacts,last_logged FROM parent;";
                     $result=$student->select($query);
                     $arraySize = sizeof($result);
 
                     foreach ($result as $array){
-                        if($array['Gender'] == 1){
+                        if($array['gender'] == 1){
                             $gender = 'male';
                         }else{
                             $gender = 'female';
                         }
-                        $temp = getLevel($array['streamLinkID']);
                         echo "<tr>";
-                        echo"<td>".$array['studentID']."</td>";
                         echo"<td>".$array['firstName']."</td>";
                         echo"<td>".$array['lastName']."</td>";
+                        echo"<td>".$array['username']."</td>";
                         echo"<td>".$gender."</td>";
-                        echo"<td>".$array['DoB']."</td>";
-                        echo"<td>".$array['adminDate']."</td>";
-                        echo"<td>".$temp[0].$temp[1]."</td>";
+                        echo"<td>".$array['contacts']."</td>";
+                        echo"<td>".$array['last_logged']."</td>";
                         echo "</tr>";
                     }
 
@@ -120,35 +111,20 @@ if(empty($_SESSION)) header("Location: register.php");
                 <input style="margin-right: 10px;" name="uname" type="text" class="mb-4 form-control" placeholder="Username">
                 <input name="pword" type="password" class="mb-4 form-control" placeholder="Password">
             </div>
-            <div class="form-row">
-                <input style="margin-right: 10px;" name="DoB" placeholder="Date of Birth" class="mb-4 form-control" type="text" onfocus="(this.type='date')"
-                        onmouseover="(this.type='date')" onmouseout="(this.type='text')">
-                <input name="admindate" class="mb-4 form-control" placeholder="Date of Admission" type="text" onfocus="(this.type='date')"
-                       onmouseover="(this.type='date')" onmouseout="(this.type='text')">
-            </div>
 
-            <br>
+            <div class="form-row">
+                <input name="phone" type="tel" class="mb-4 form-control" placeholder="Phone Number" style="margin-right: 10px;">
+                <input name="adminNo" type="text" class="mb-4 form-control" placeholder="Student's admission number">
+
+            </div>
             <select name="gender" class="mb-4">
-<!--                Male is represented by true while female with false-->
+                <!--                Male is represented by true while female with false-->
                 <option value="" disabled selected hidden>Select the Gender</option>
                 <option value="1" >Male</option>
                 <option value="0" >Female</option>
             </select>
-
-            <select name="class" class="mb-4">
-<!--                The values represent the classes in the database-->
-                <option value="" disabled selected hidden>Select the Class</option>
-                <option value="500">A</option>
-                <option value="501">D</option>
-                <option value="502">K</option>
-                <option value="503">L</option>
-                <option value="504">M</option>
-                <option value="505">N</option>
-                <option value="506">S</option>
-                <option value="507">T</option>
-            </select>
             <br>
-            <input class="btn" type="submit" name="regStudent" value="Register">
+            <input class="btn" type="submit" name="regParent" value="Register">
         </form>
     </div>
 <script src="../javascrip.js"></script>

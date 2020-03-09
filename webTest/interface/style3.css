@@ -68,9 +68,10 @@ body{
     border: 1px solid #000000;
 }
 td{
+    color: white;
     padding: 3px;
     border: 1px solid #000000;
-    font-size: 18px;
+    font-size: 20px;
 }
 .signupform .btn{
     padding: 5px;

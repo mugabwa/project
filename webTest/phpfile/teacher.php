@@ -95,3 +95,17 @@ function genderToBool($gender){
         return false;
     }
 }
+
+//function that returns the class a student is currently studying in.
+function getLevel($linkID){
+    global $connection;
+    $query = "SELECT FormID,ClassID FROM streamLink WHERE streamID = ?;";
+    $paramType = "i";
+    $paramArray = array($linkID);
+    $result = $connection->select($query,$paramType,$paramArray);
+    $query1 = "SELECT levelName FROM form WHERE formID = ?;";
+    $result1 = $connection->select($query1,$paramType,array($result[0]['FormID']));
+    $query2 = "SELECT className FROM class WHERE classID =?;";
+    $result2 = $connection->select($query2,$paramType,array($result['0']['ClassID']));
+    return array($result1[0]['levelName'],$result2[0]['className']);
+}
