@@ -20,7 +20,7 @@ $conn = $dbConn->connect();
     if(isset($_POST['regTeacher'])){
         $teacher = new Teacher();
         $teacher->getValues($conn, 'fname', 'lname', 'gender', 'uname', 'pword',
-            'phone', 'birth');
+            'phone', 'birth','subject', 'classTaught');
     }
     //Administrator signup interface
     if(isset($_POST['regAdmin'])){

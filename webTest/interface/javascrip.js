@@ -39,6 +39,8 @@ var modal = document.getElementById("studentModal");
 var btn = document.getElementById("newBtn");
 //get the span element
 var span = document.getElementsByClassName("close")[0];
+
+let value, oldVal;
 //open action
 btn.onclick = function () {
     modal.style.display = "block";
@@ -67,3 +69,54 @@ function  loadProf() {
     xhttp.send();
 }
 
+//Dropdown checkboxes
+function showCheckboxes() {
+    var expanded = false;
+    oldVal = value;
+
+    value = document.getElementById("formSelector").value;
+
+
+    var myid, myid2;
+    var state = true;
+    console.log(value);
+    if(oldVal=="f1"){
+        myid2 = "checkboxes1"
+    } else if (oldVal == "f2"){
+        myid2 = "checkboxes2"
+    }else if (oldVal == "f3"){
+        myid2 = "checkboxes3"
+    }else if (oldVal == "f4"){
+        myid2 = "checkboxes4"
+    }
+    if (oldVal != undefined && myid2 != undefined)  document.getElementById(myid2).style.display = "none";
+
+    if(value=="f1"){
+        myid = "checkboxes1"
+    } else if (value == "f2"){
+        myid = "checkboxes2"
+    }else if (value == "f3"){
+        myid = "checkboxes3"
+    }else if (value == "f4"){
+        myid = "checkboxes4"
+    }else{
+        state = false;
+        expanded = false;    }
+
+
+    console.log(myid);
+    if(!state){
+        var checkboxes = document.getElementById(myid);
+        if (checkboxes != undefined) checkboxes.style.display = "none";
+    }else {
+        var checkboxes = document.getElementById(myid);
+        if (!expanded){
+            checkboxes.style.display="inline-block";
+            expanded = true;
+        } else {
+            checkboxes.style.display = "none";
+            expanded = false;
+        }
+    }
+
+}

@@ -118,7 +118,7 @@ if(empty($_SESSION)) header("Location: register.php");
 
             <div class="form-row">
                 <input name="phone" type="tel" class="mb-4 form-control" placeholder="Phone Number" style="margin-right: 10px;">
-                <input name="birth" type="date" placeholder="Date of Birth" class="mb-4 form-control" type="text" onfocus="(this.type='date')"
+                <input name="birth" placeholder="Date of Birth" class="mb-4 form-control" type="text" onfocus="(this.type='date')"
                        onmouseover="(this.type='date')" onmouseout="(this.type='text')">
 
             </div>
@@ -149,50 +149,61 @@ if(empty($_SESSION)) header("Location: register.php");
                     <option value="116">French Language</option>
                 </select>
             </div>
-            <div class="form-row">
-                <select name="classTaught" class="mb-4">
-                    <option>1A</option>
-                    <option>1D</option>
-                    <option>1K</option>
-                    <option>1L</option>
-                    <option>1M</option>
-                    <option>1N</option>
-                    <option>1S</option>
-                    <option>1T</option>
-                    <option>2A</option>
-                    <option>2D</option>
-                    <option>2K</option>
-                    <option>2L</option>
-                    <option>2M</option>
-                    <option>2N</option>
-                    <option>2S</option>
-                    <option>2T</option>
-                    <option>3A</option>
-                    <option>3D</option>
-                    <option>3K</option>
-                    <option>3L</option>
-                    <option>3M</option>
-                    <option>3N</option>
-                    <option>3S</option>
-                    <option>3T</option>
-                    <option>4A</option>
-                    <option>4D</option>
-                    <option>4K</option>
-                    <option>4L</option>
-                    <option>4M</option>
-                    <option>4N</option>
-                    <option>4S</option>
-                    <option>4T</option>
-                </select>
-                <select name="role" class="mb-4">
-                    <option value="" disabled selected hidden>Select role played</option>
-                    <option value="classTeacher">Class Teacher</option>
-                    <option value="subjectTeacher">Subject Teacher</option>
-                </select>
+            <div class="multiselect">
+                <div class="form-row">
+                    <select class="mb-4" id="formSelector" onchange="showCheckboxes()">
+                        <option>Select class taught</option>
+                        <option value="f1">Form 1</option>
+                        <option value="f2">Form 2</option>
+                        <option value="f3">Form 3</option>
+                        <option value="f4">Form 4</option>
+                    </select>
+                    <div class="overSelect"></div>
+                </div>
+                <div id="checkboxes1">
+                    <label for="f1a"><input name="classTaught[]" value="700" type="checkbox" id="f1a">Form 1A</label>
+                    <label for="f1d"><input name="classTaught[]" value="701" type="checkbox" id="f1d">Form 1D</label>
+                    <label for="f1k"><input name="classTaught[]" value="702" type="checkbox" id="f1k">Form 1K</label>
+                    <label for="f1l"><input name="classTaught[]" value="703" type="checkbox" id="f1l">Form 1L</label>
+                    <label for="f1m"><input name="classTaught[]" value="704" type="checkbox" id="f1m">Form 1M</label>
+                    <label for="f1n"><input name="classTaught[]" value="705" type="checkbox" id="f1n">Form 1N</label>
+                    <label for="f1s"><input name="classTaught[]" value="706" type="checkbox" id="f1s">Form 1S</label>
+                    <label for="f1t"><input name="classTaught[]" value="707" type="checkbox" id="f1t">Form 1T</label>
+                </div>
+                <div id="checkboxes2">
+                    <label for="f2a"><input name="classTaught[]" value="708" type="checkbox" id="f2a">Form 2A</label>
+                    <label for="f2d"><input name="classTaught[]" value="709" type="checkbox" id="f2d">Form 2D</label>
+                    <label for="f2k"><input name="classTaught[]" value="710" type="checkbox" id="f2k">Form 2K</label>
+                    <label for="f2l"><input name="classTaught[]" value="711" type="checkbox" id="f2l">Form 2L</label>
+                    <label for="f2m"><input name="classTaught[]" value="712" type="checkbox" id="f2m">Form 2M</label>
+                    <label for="f2n"><input name="classTaught[]" value="713" type="checkbox" id="f2n">Form 2N</label>
+                    <label for="f2s"><input name="classTaught[]" value="714" type="checkbox" id="f2s">Form 2S</label>
+                    <label for="f2t"><input name="classTaught[]" value="715" type="checkbox" id="f2t">Form 2T</label>
+                </div>
+                <div id="checkboxes3">
+                    <label for="f3a"><input name="classTaught[]" value="716" type="checkbox" id="f3a">Form 3A</label>
+                    <label for="f3d"><input name="classTaught[]" value="717" type="checkbox" id="f3d">Form 3D</label>
+                    <label for="f3k"><input name="classTaught[]" value="718" type="checkbox" id="f3k">Form 3K</label>
+                    <label for="f3l"><input name="classTaught[]" value="719" type="checkbox" id="f3l">Form 3L</label>
+                    <label for="f3m"><input name="classTaught[]" value="720" type="checkbox" id="f3m">Form 3M</label>
+                    <label for="f3n"><input name="classTaught[]" value="721" type="checkbox" id="f3n">Form 3N</label>
+                    <label for="f3s"><input name="classTaught[]" value="722" type="checkbox" id="f3s">Form 3S</label>
+                    <label for="f3t"><input name="classTaught[]" value="723" type="checkbox" id="f3t">Form 3T</label>
+                </div>
+                <div id="checkboxes4">
+                    <label for="f4a"><input name="classTaught[]" value="724" type="checkbox" id="f4a">Form 4A</label>
+                    <label for="f4d"><input name="classTaught[]" value="725" type="checkbox" id="f4d">Form 4D</label>
+                    <label for="f4k"><input name="classTaught[]" value="726" type="checkbox" id="f4k">Form 4K</label>
+                    <label for="f4l"><input name="classTaught[]" value="727" type="checkbox" id="f4l">Form 4L</label>
+                    <label for="f4m"><input name="classTaught[]" value="728" type="checkbox" id="f4m">Form 4M</label>
+                    <label for="f4n"><input name="classTaught[]" value="729" type="checkbox" id="f4n">Form 4N</label>
+                    <label for="f4s"><input name="classTaught[]" value="730" type="checkbox" id="f4s">Form 4S</label>
+                    <label for="f4t"><input name="classTaught[]" value="731" type="checkbox" id="f4t">Form 4T</label>
+                </div>
             </div>
 
             <br>
-            <input class="btn" type="submit" name="regParent" value="Register">
+            <input class="btn" type="submit" name="regTeacher" value="Register">
         </form>
     </div>
 <script src="../javascrip.js"></script>

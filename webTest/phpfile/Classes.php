@@ -297,13 +297,17 @@ class StudentParent extends Person{
 class Teacher extends Person{
     private $phone;
     private $birthDate;
+    private $subject;
+    private $class;
     public function __construct()
     {
         parent::__construct();
         $this->phone = '0700000000';
+        $this->subject = 123;
+        $this->class = array();
         $this->birthDate = date('Y/m/d');
     }
-    public function getValues($connector,$fname,$lname,$sex,$user,$pass,$contact,$birth){
+    public function getValues($connector,$fname,$lname,$sex,$user,$pass,$contact,$birth,$sub,$clas){
         $this->username = mysqli_real_escape_string($connector,$_POST[$user]);
         $this->password = mysqli_real_escape_string($connector,$_POST[$pass]);
         $this->lastName = mysqli_real_escape_string($connector,$_POST[$lname]);
@@ -311,23 +315,44 @@ class Teacher extends Person{
         $this->gender = mysqli_real_escape_string($connector,$_POST[$sex]);
         $this->phone = mysqli_real_escape_string($connector,$_POST[$contact]);
         $this->birthDate = mysqli_real_escape_string($connector, $_POST[$birth]);
+        $this->subject = mysqli_real_escape_string($connector,$_POST[$sub]);
+        foreach ($_POST[$clas] as $k=>$v){
+            $this->class[mysqli_real_escape_string($connector, $k)] = mysqli_real_escape_string($connector,$v);
+        }
 //        $this->innerConver();
-        $this->setDetails();
+        $teacherID = $this->setDetails();
+        $this->setSubject($teacherID);
     }
+    //sets the class and the subject a teacher teaches
+    private function setSubject($teacherID){
+        $query = "INSERT INTO subject_teacher (streamID,subjectID,teacherID) VALUES (?,?,?);";
+        $paramType = "iii";
+        foreach ($this->class as $value){
+            $paramArray = array($value,$this->subject,$teacherID);
+            print_r($paramArray);
+            $result = $this->myconnect->insert($query,$paramType,$paramArray);
+            if(empty($result)){
+                header("Location: ../interface/test/registerTeacher.php?failed1");
+                break;
+            }
+            echo $result;
+        }
+        if(!empty($result)){
+            header("Location: ../interface/test/registerTeacher.php?success");
+        }
+    }
+
     private function setDetails(){
         $curDate = date('Y/m/d');
-        $query = "INSERT INTO teacher(firstName,lastName,username,password,DoB,gender,contacts,last_logged) VALUE (?,?,?,?,?,?,?,?);";
+        $query = "INSERT INTO teacher(firstName,lastName,username,password,DoB,gender,contacts,last_logged) VALUES (?,?,?,?,?,?,?,?);";
         $paramType = "sssssiss";
         $paramArray = array($this->firstName,$this->lastName,$this->username,$this->password,
             $this->birthDate,$this->gender,$this->phone,$curDate);
         $result = $this->myconnect->insert($query,$paramType,$paramArray);
         if(!empty($result)){
-            header("Location: ../interface/test/registerTeacher.php?success");
+            return $result;
         }else{
             header("Location: ../interface/test/registerTeacher.php?failed");
         }
-    }
-    private function setSubject($teacherID){
-
     }
 }
