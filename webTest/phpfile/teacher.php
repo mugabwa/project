@@ -32,50 +32,40 @@ if (isset($_POST['examSubmit'])){
     $stream = mysqli_real_escape_string($conn, $_POST['stream']);
     $subject = mysqli_real_escape_string($conn, $_POST['subject']);
     $term = mysqli_real_escape_string($conn, $_POST['termdate']);
-    $examName = mysqli_real_escape_string($conn, $_POST['exname']);
     $examType = mysqli_real_escape_string($conn, $_POST['examtype']);
     $examDate = mysqli_real_escape_string($conn, $_POST['date_exam']);
-//    echo $form.$stream.$subject.$term.$examName.$examType.$examDate;
-    $query = "SELECT formID FROM form WHERE levelName=?;";
-    $paramType = 'i';
-    $paremArray = array($form);
-    $result = $connection->select($query,$paramType,$paremArray);
-    $formID = $result[0]['formID'];  //form ID
-    $query1 = "SELECT classID FROM class WHERE className = ?;";
-    $paramType1 = 's';
-    $paremArray1 = array($stream);
-    $result1 = $connection->select($query1,$paramType1,$paremArray1);
-    $streamID = $result1[0]['classID'];  //stream ID
 
-    $query2 = "SELECT streamID FROM streamLink WHERE FormID = ? AND ClassID = ?;";
-    $paramType2 = 'ii';
-    $paremArray2 = array($formID, $streamID);
-    $result2 = $connection->select($query2,$paramType2,$paremArray2);
+
+    $query = "SELECT streamID FROM streamLink WHERE FormID = ? AND ClassID = ?;";
+    $paramType = 'ii';
+    $paramArray = array($form, $stream);
+    $result2 = $connection->select($query,$paramType,$paramArray);
     $streamLinkID = $result2[0]['streamID'];
 
-    $query3 = "SELECT subjectID FROM subject WHERE name = ?;";
-    $paramType3 = 's';
-    $paremArray3 = array($subject);
-    $result3 = $connection->select($query3,$paramType3,$paremArray3);
-    $subjectID = $result3[0]['subjectID'];
+    $result3 = getSubject($subject);
+    $subjectName = $result3[0]['name'];
 
-    $query4 = "INSERT INTO examDetails (examName,examType,examDate,term) VALUES (?,?,?,?);";
-    $paramType4 = "sssi";
-    $paremArray4 = array($examName,$examType,$examDate,$term);
-    $result4 = $connection->insert($query4,$paramType4,$paremArray4);
+    $query4 = "INSERT INTO examDetails (examType,examDate,term) VALUES (?,?,?);";
+    $paramType4 = "ssi";
+    $paramArray4 = array($examType,$examDate,$term);
+    $result4 = $connection->insert($query4,$paramType4,$paramArray4);
     if(!empty($result4)){
         header("Location: ../interface/test/resultForm.php?Recorded created!");
-        echo "Record successfully created";
+        session_start();
+        $_SESSION['subID'] = $subject;
+        $_SESSION['streamID'] = $streamLinkID;
+        $_SESSION['examID'] = $result4;
+        $_SESSION['classID'] = $stream;
+        $_SESSION['formID'] = $form;
     }else{
         header("Location: ../interface/test/examDetails.php?Error: Recorded not created!");
 //        print_r($paremArray);
         exit(1);
     }
-//    session_start();
-//    $_SESSION['subjectId'] = $subjectID;
-//    $_SESSION['linkId'] = $streamLinkID;
     exit(0);
 }
+
+//Not complete
 if(isset($_POST['profileChange'])){
     $fname = mysqli_real_escape_string($conn, $_POST['fname']);
     $lname = mysqli_real_escape_string($conn,$_POST['lname']);
@@ -88,11 +78,20 @@ if(isset($_POST['profileChange'])){
     $query = "UPDATE teacher SET ";
 }
 
+
 function genderToBool($gender){
     if($gender == 'male'){
         return true;
     }elseif ($gender=='female'){
         return false;
+    }
+}
+
+function genderConvert($gender){
+    if($gender){
+        return "male";
+    }else{
+        return "female";
     }
 }
 
@@ -108,4 +107,37 @@ function getLevel($linkID){
     $query2 = "SELECT className FROM class WHERE classID =?;";
     $result2 = $connection->select($query2,$paramType,array($result['0']['ClassID']));
     return array($result1[0]['levelName'],$result2[0]['className']);
+}
+
+//function to return the details about a teacher
+function getDetails($teacherID){
+    global $connection;
+    $query = "SELECT streamID,subjectID FROM subject_teacher WHERE teacherID = ?;";
+    $paramType = "i";
+    $paramArray = array($teacherID);
+    return $connection->select($query,$paramType,$paramArray);
+}
+
+//function to return the subject name
+function getSubject($subID){
+    global $connection;
+    $query = "SELECT name FROM subject WHERE subjectID= ?;";
+    $paramType = "i";
+    $paramArray = array($subID);
+    return $connection->select($query,$paramType,$paramArray);
+}
+
+function getExamDetails($examID){
+    global $connection;
+    $query = "SELECT * FROM examDetails WHERE examID = ?;";
+    $paramType = "i";
+    $paramArray = array($examID);
+    return $connection->select($query,$paramType,$paramArray);
+}
+
+function studentDetails($streamLink){
+    global $connection;
+    $query = "SELECT * FROM student_info WHERE streamLinkID = ?;";
+    $result = $connection->select($query,"i",array($streamLink));
+    return $result;
 }

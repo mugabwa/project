@@ -67,10 +67,7 @@ session_start();
         </div>
         <div class="grid-container-right profile-text">
 
-            <?php
-//            echo sprintf("Welcome %s %s", $_SESSION['fname'], $_SESSION['lname'])."<br>";
-//            echo $mydetails['firstName'];
-            ?>
+
             <h2>About Me</h2>
             <hr>
             <div>
@@ -78,11 +75,27 @@ session_start();
             </div>
             <h2>Details</h2>
             <hr>
-            <p><strong>Subjects taught:</strong></p>
-            <p><strong>Classes:</strong></p>
-            <p><strong>Role:</strong></p>
-            <p><strong>Professional Details:</strong></p>
-            <button>Edit</button>
+            <?php
+            $teacherDetails = getDetails($_SESSION['userId']);
+            $arrayOne = array();
+            $arrayTwo = array();
+            $arrayThree = array();
+            foreach ($teacherDetails as $a){
+                $arrayOne[] = $a['streamID'];
+                $arrayTwo[] = $a['subjectID'];
+            }
+            $arrayThree = array_unique($arrayTwo);
+            foreach ($arrayThree as $value){
+                $subject=getSubject($value);
+            }
+            ?>
+            <p><strong>Subjects taught: </strong><?php echo $subject[0]['name'];?></>
+            <p><strong>Classes:</strong> <?php
+                foreach ($arrayOne as $v){
+                    $form=getLevel($v);
+                    echo $form[0].$form[1].", ";
+                }
+                ?></p>
         </div>
     </div>
     <div class="grid-container-footer">
@@ -111,27 +124,11 @@ session_start();
         <div class="form-col">
             <div class="form-input validate-input" style="margin-right: 20px;" data-validate="Name is required">
                 <span class="label-input">Username</span>
-                <input class="input100" type="text" name="uname" placeholder="<?php echo $mydetails['username']; ?>">
-                <span class="focus-input"></span>
+                <input class="input100" type="text" name="lname" placeholder="<?php echo $mydetails['username']; ?>">
             </div>
             <div class="form-input validate-input" data-validate="Date of birth is required">
                 <span class="label-input">Date of Birth</span>
                 <input class="input100" type="date" name="birthDate" placeholder="DoB..">
-                <span class="focus-input"></span>
-            </div>
-        </div>
-        <div class="form-col">
-            <div class="form-input validate-input" style="margin-right: 20px;" data-validate="Gender is required">
-                <span class="label-input">Gender</span>
-                <select name="gender">
-                    <option value="" disabled selected hidden>Select your gender</option>
-                    <option value="male">Male</option>
-                    <option value="female">Female</option>
-                </select>
-            </div>
-            <div class="form-input validate-input" data-validate="Phone is required">
-                <span class="label-input">Phone</span>
-                <input class="input100" type="text" name="phone" placeholder="<?php echo $mydetails['contacts']; ?>">
                 <span class="focus-input"></span>
             </div>
         </div>

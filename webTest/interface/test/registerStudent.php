@@ -74,7 +74,7 @@ if(empty($_SESSION)) header("Location: register.php");
                     include "../../phpfile/teacher.php";
                     $student = new DBConnector();
                     $query = "SELECT * FROM student_info;";
-                    $result=$student->select($query);
+                    $result = $student->select($query);
                     $arraySize = sizeof($result);
 
                     foreach ($result as $array){

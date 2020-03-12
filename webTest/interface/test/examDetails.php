@@ -59,89 +59,76 @@ if(empty($_SESSION)) header("Location: loginTeacher.php");
         <div class="grid-container-right">
             <div class="detailform">
                 <form method="post" action="../../phpfile/teacher.php">
-                    <div class="form-row mb-4">
-                        <div class="col">
-                            <label for="myLevel">Level:</label>
+                    <div class="form-row1-container">
+                        <div class="form-row1">
+                            <label for="myLevel" style="margin-top: 10px;">Level:</label>
                             <select name="level" id="myLevel">
                                 <option value="" disabled selected hidden>Select a stream</option>
-                                <option value="1">Form 1</option>
-                                <option value="2">Form 2</option>
-                                <option value="3">Form 3</option>
-                                <option value="4">Form 4</option>
+                                <option value="200">Form 1</option>
+                                <option value="201">Form 2</option>
+                                <option value="203">Form 3</option>
+                                <option value="204">Form 4</option>
                             </select>
-                        </div>
-                        <div class="col">
-                            <label for="myclass">Class:</label>
+                            <label for="myclass" style="margin-top: 10px;">Class:</label>
                             <select id="myclass" name="stream">
                                 <option value="" disabled selected hidden>Select a class</option>
-                                <option value="A">A</option>
-                                <option value="D">D</option>
-                                <option value="K">K</option>
-                                <option value="L">L</option>
-                                <option value="M">M</option>
-                                <option value="S">S</option>
-                                <option value="T">T</option>
+                                <option value="500">A</option>
+                                <option value="501">D</option>
+                                <option value="502">K</option>
+                                <option value="503">L</option>
+                                <option value="504">M</option>
+                                <option value="505">N</option>
+                                <option value="506">S</option>
+                                <option value="507">T</option>
                             </select>
-                        </div>
-                    </div>
-                    <div class="form-row mb-4">
-                        <div class="col">
-                            <label for="mySubject">Subjects:</label>
+                            <label for="mySubject" style="margin-top: 10px;">Subjects:</label>
                             <select id="mySubject" name="subject">
                                 <option value="" disabled selected hidden>Select a subject</option>
-                                <option value="eng">English</option>
-                                <option value="kisw">Kiswahili</option>
-                                <option value="math">Mathematics</option>
-                                <option value="bio">Biology</option>
-                                <option value="chem">Chemistry</option>
-                                <option value="phys">Physics</option>
-                                <option value="histo">History</option>
-                                <option value="geo">Geography</option>
-                                <option value="cre">CRE</option>
-                                <option value="buss">Business</option>
-                                <option value="a/d">Art and Design</option>
-                                <option value="d/d">Drawing and Design</option>
-                                <option value="agrics">Agriculture</option>
-                                <option value="music">Music</option>
-                                <option value="comps">Computer Studies</option>
-                                <option value="french">French Language</option>
+                                <option value="102">English</option>
+                                <option value="103">Kiswahili</option>
+                                <option value="101">Mathematics</option>
+                                <option value="104">Biology</option>
+                                <option value="106">Chemistry</option>
+                                <option value="105">Physics</option>
+                                <option value="107">History</option>
+                                <option value="108">Geography</option>
+                                <option value="109">CRE</option>
+                                <option value="110">Business</option>
+                                <option value="111">Art and Design</option>
+                                <option value="112">Drawing and Design</option>
+                                <option value="113">Agriculture</option>
+                                <option value="114">Music</option>
+                                <option value="115">Computer Studies</option>
+                                <option value="116">French Language</option>n>
                             </select>
                         </div>
-                        <div class="col">
-                            <label for="term">Term:</label>
+                        <div class="form-row1">
+                            <!--                        <div class="col">-->
+                            <label for="term" style="margin-top: 10px;">Term:</label>
                             <select name="termdate" id="term">
                                 <option value="" disabled selected hidden>Select the term</option>
                                 <option value="1">I</option>
                                 <option value="2">II</option>
                                 <option value="3">III</option>
                             </select>
-                        </div>
+                            <!--                        </div>-->
 
-
-                    </div>
-                    <div class="form-row mb-4">
-                        <div>
-                            <label for="exam_name">Exam name:</label>
-                            <input type="text" name="exname" id="exam_name" placeholder="Enter exam name">
-                        </div>
-                        <div>
-                            <label for="exam_type">Exam type:</label>
+                            <label for="exam_type" style="margin-top: 10px;">Exam type:</label>
                             <select name="examtype" id="exam_type">
                                 <option value="" disabled selected hidden>Select exam type</option>
                                 <option value="Entry">Entry</option>
                                 <option value="Midterm">Midterm</option>
                                 <option value="End term">End term</option>
                             </select>
-                        </div>
-                    </div>
-                    <div class="form-row mb-4">
-                        <div>
-                            <label for="examdate">Exam date:</label>
+                            <label for="examdate" style="margin-top: 10px;">Exam date:</label>
                             <input type="date" name="date_exam" id="examdate">
                         </div>
                     </div>
-                    <button class="btn btn-primary" type="submit" name="examSubmit">Submit</button>
-                    <button class="btn btn-primary" type="reset" name="resetbtn">Clear</button>
+                    <br>
+                    <div class="btn101">
+                        <button class="btn btn-primary" type="submit" name="examSubmit">Submit</button>
+                        <button class="btn btn-primary" type="reset" name="resetbtn">Clear</button>
+                    </div>
                 </form>
 
 

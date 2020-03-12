@@ -645,3 +645,38 @@ body{
 #checkboxes1 label:hover,#checkboxes2 label:hover,#checkboxes3 label:hover,#checkboxes4 label:hover{
     background-color: #1e90ff;
 }
+.form-row1{
+    display: flex;
+    width: 45%;
+    flex-direction: column;
+}
+.form-row1-container{
+    display: flex;
+    justify-content: space-between;
+}
+.btn101{
+    align-items: center;
+    display: flex;
+    justify-content: space-evenly;
+}
+#examdate{
+    padding: 10px;
+    border-radius: 5px;
+}
+@media (max-width: 660px) {
+    .form-row1-container{
+        display: flex;
+        flex-direction: column;
+    }
+    .form-row1{
+        width: 100%;
+    }
+    .btn101{
+        align-items: center;
+        display: flex;
+        justify-content: center;;
+    }
+}
+.btn-primary{
+    width: 15%;
+}

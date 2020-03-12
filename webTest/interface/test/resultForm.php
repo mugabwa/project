@@ -58,19 +58,27 @@ if(empty($_SESSION)) header("Location: loginTeacher.php");
         </div>
         <div class="grid-container-right">
             <div class="detailform1">
+                <?php
+//                echo '<pre>' . print_r($_SESSION, TRUE) . '</pre>';
+                ?>
                 <div class="table-responsive">
                     <table class="table">
                         <tr>
-                            <td>Form: </td>
-                            <td>Class: </td>
-                            <td>Subject: </td>
-                            <td>Teacher: <?php echo $_SESSION['fname']." ".$_SESSION['lname'];?></td>
+                            <?php
+                            $temp = getLevel($_SESSION['streamID']);
+                            $result=getSubject($_SESSION['subID']);
+                            echo "<td>Class: ".$temp[0].$temp[1]."</td>";
+                            echo "<td>Subject: ".$result[0]['name']."</td>";
+                            echo "<td>Teacher: ".$_SESSION['fname']." ".$_SESSION['lname']."</td>";
+                            ?>
                         </tr>
                         <tr>
-                            <td>Exam type: </td>
-                            <td>Exam name: </td>
-                            <td>Term: </td>
-                            <td>Exam date: </td>
+                            <?php
+                            $exam = getExamDetails($_SESSION['examID']);
+                            echo "<td>Exam type: ".$exam[0]['examType'];
+                            echo "<td>Term: ".$exam[0]['term'];
+                            echo "<td>Exam date: ".$exam[0]['examDate'];
+                            ?>
                         </tr>
                     </table>
                 </div>
@@ -86,14 +94,16 @@ if(empty($_SESSION)) header("Location: loginTeacher.php");
                         </tr>
                         </thead>
                         <tbody>
-                        <tr>
-                            <td>57734gdi</td>
-                            <td>Allan</td>
-                            <td>Siema</td>
-                            <td>
-                                <input type="text" name="mark" form="my_form">
-                            </td>
-                        </tr>
+                        <?php
+                        $result1=studentDetails($_SESSION['streamID']);
+                        foreach ($result1 as $value){
+                            echo "<tr>"."<td>".$value['studentID']."</td>";
+                            echo "<td>".$value['firstName']."</td>";
+                            echo "<td>".$value['lastName']."</td>";
+                            echo "<td> <input type=\"text\" name=".$value['firstName'].$value['lastName']." form=\"my_form\"> </td>";
+                            echo "</tr>";
+                        }
+                        ?>
                         </tbody>
                     </table>
                     <input type="submit" form="my_form" name="submit" value="SUBMIT">
