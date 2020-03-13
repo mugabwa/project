@@ -48,16 +48,10 @@ if(empty($_SESSION)) header("Location: loginTeacher.php");
                 <hr>
                 <li class="sidebar-item"><a class="sidebar-link" href="examDetails.php">Results</a></li>
                 <hr>
-                <li class="sidebar-item"><a class="sidebar-link" href="#">Student Score</a></li>
+                <li class="sidebar-item"><a class="sidebar-link" href="overallResult.php">Student Score</a></li>
                 <hr>
                 <li class="sidebar-item"><a class="sidebar-link" href="#">Class Score</a></li>
                 <hr>
-<!--                <li class="sidebar-item"><a class="sidebar-link" href="#">element3</a></li>-->
-<!--                <li class="sidebar-item"><a class="sidebar-link" href="#">element4</a></li>-->
-<!--                <li class="sidebar-item"><a class="sidebar-link" href="#">element5</a></li>-->
-<!--                <li class="sidebar-item"><a class="sidebar-link" href="#">element6</a></li>-->
-<!--                <li class="sidebar-item"><a class="sidebar-link" href="#">element7</a></li>-->
-<!--            </ul>-->
         </div>
         <div class="grid-container-right">
 

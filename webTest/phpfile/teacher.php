@@ -34,6 +34,20 @@ if (isset($_POST['examSubmit'])){
     $term = mysqli_real_escape_string($conn, $_POST['termdate']);
     $examType = mysqli_real_escape_string($conn, $_POST['examtype']);
     $examDate = mysqli_real_escape_string($conn, $_POST['date_exam']);
+    $examDate = date('Y', strtotime($examDate));
+
+
+    $query1 = "SELECT * FROM examDetails WHERE examType=? AND examDate=? AND term=?;";
+    $paramType1="ssi";
+    $paramArray1=array($examType,$examDate,$term);
+    if(!empty($result=$connection->select($query1,$paramType1,$paramArray1))){
+        $examID = $result[0]['examID'];
+    }else{
+        $query4 = "INSERT INTO examDetails (examType,examDate,term) VALUES (?,?,?);";
+        $paramType4 = "ssi";
+        $paramArray4 = array($examType,$examDate,$term);
+        $examID = $connection->insert($query4,$paramType4,$paramArray4);
+    }
 
 
     $query = "SELECT streamID FROM streamLink WHERE FormID = ? AND ClassID = ?;";
@@ -44,17 +58,14 @@ if (isset($_POST['examSubmit'])){
 
     $result3 = getSubject($subject);
     $subjectName = $result3[0]['name'];
+//
 
-    $query4 = "INSERT INTO examDetails (examType,examDate,term) VALUES (?,?,?);";
-    $paramType4 = "ssi";
-    $paramArray4 = array($examType,$examDate,$term);
-    $result4 = $connection->insert($query4,$paramType4,$paramArray4);
-    if(!empty($result4)){
+    if(!empty($examID)){
         header("Location: ../interface/test/resultForm.php?Recorded created!");
         session_start();
-        $_SESSION['subID'] = $subject;
-        $_SESSION['streamID'] = $streamLinkID;
-        $_SESSION['examID'] = $result4;
+        $_SESSION['subID'] = $subject;              //subject ID
+        $_SESSION['streamID'] = $streamLinkID;      //stream ID
+        $_SESSION['examID'] = $examID;
         $_SESSION['classID'] = $stream;
         $_SESSION['formID'] = $form;
     }else{
@@ -138,6 +149,57 @@ function getExamDetails($examID){
 function studentDetails($streamLink){
     global $connection;
     $query = "SELECT * FROM student_info WHERE streamLinkID = ?;";
-    $result = $connection->select($query,"i",array($streamLink));
-    return $result;
+    return $connection->select($query,"i",array($streamLink));
+}
+
+function studentResults(){
+    global $connection;
+    $query = "SELECT * FROM student_info;";
+    return $connection->select($query);
+}
+
+function examInfo(){
+    global $connection;
+    $query = "SELECT * FROM examDetails;";
+    return $connection->select($query);
+}
+
+function getResults($examID){
+    global $connection;
+    $query = "SELECT * FROM exam WHERE examID = ?;";
+    $paramType = "i";
+    $paramArray = array($examID);
+    return $connection->select($query,$paramType,$paramArray);
+}
+
+function studentRegId($streamLink){
+    global $connection;
+    $query = "SELECT studentID FROM student_info WHERE streamLinkID = ?;";
+    return $connection->select($query,"i",array($streamLink));
+}
+
+
+function insertMarks($marks,$streamID,$subID,$studID,$exID){
+    global $connection;
+    $query = "INSERT INTO exam (results,streamLinkID,subjectID,studentID,examID) VALUES (?,?,?,?,?);";
+    $paramType = "diiii";
+    $paramArray = array($marks,$streamID,$subID,$studID,$exID);
+    $connection->insert($query,$paramType,$paramArray);
+}
+
+if(isset($_POST['resultSubmit'])){
+    $index = array();
+    session_start();
+    $array=studentRegId($_SESSION['streamID']);
+    foreach ($array as $k){
+        array_push($index, $k['studentID']);
+    }
+    foreach ($index as $v){         //$v is the student ID
+        $regNo = mysqli_real_escape_string($conn,$_POST[$v]);
+        if(!empty($regNo)){
+            insertMarks($regNo,$_SESSION['streamID'],$_SESSION['subID'], $v, $_SESSION['examID']);
+        }
+    }
+    header("Location: ../interface/test/overallResult.php?Score_successfully_added!");
+    exit(0);
 }

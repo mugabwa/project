@@ -77,36 +77,38 @@ if(empty($_SESSION)) header("Location: loginTeacher.php");
                             $exam = getExamDetails($_SESSION['examID']);
                             echo "<td>Exam type: ".$exam[0]['examType'];
                             echo "<td>Term: ".$exam[0]['term'];
-                            echo "<td>Exam date: ".$exam[0]['examDate'];
+                            echo "<td>Exam year: ".$exam[0]['examDate'];
                             ?>
                         </tr>
                     </table>
                 </div>
                 <div class="table-responsive">
-                    <form method="post" action="#" id="my_form"></form>
-                    <table class="table table-bordered">
-                        <thead>
-                        <tr>
-                            <th>Admission Number</th>
-                            <th>Last Name</th>
-                            <th>First Name</th>
-                            <th>Marks</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <?php
-                        $result1=studentDetails($_SESSION['streamID']);
-                        foreach ($result1 as $value){
-                            echo "<tr>"."<td>".$value['studentID']."</td>";
-                            echo "<td>".$value['firstName']."</td>";
-                            echo "<td>".$value['lastName']."</td>";
-                            echo "<td> <input type=\"text\" name=".$value['firstName'].$value['lastName']." form=\"my_form\"> </td>";
-                            echo "</tr>";
-                        }
-                        ?>
-                        </tbody>
-                    </table>
-                    <input type="submit" form="my_form" name="submit" value="SUBMIT">
+                    <form method="post" action="../../phpfile/teacher.php" id="my_form">
+                        <table class="table table-bordered">
+                            <thead>
+                            <tr>
+                                <th>Admission Number</th>
+                                <th>Last Name</th>
+                                <th>First Name</th>
+                                <th>Marks</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <?php
+                            $result1=studentDetails($_SESSION['streamID']);
+                            foreach ($result1 as $value){
+                                echo "<tr>"."<td>".$value['studentID']."</td>";
+                                echo "<td>".$value['firstName']."</td>";
+                                echo "<td>".$value['lastName']."</td>";
+                                echo "<td> <input type=\"text\" name=".$value['studentID']." form=\"my_form\"> </td>";
+                                echo "</tr>";
+                            }
+                            ?>
+                            </tbody>
+                        </table>
+                        <input type="submit" form="my_form" name="resultSubmit" value="SUBMIT">
+                    </form>
+
                 </div>
             </div>
         </div>
