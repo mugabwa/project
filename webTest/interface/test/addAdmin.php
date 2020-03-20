@@ -7,6 +7,8 @@
     <link rel="stylesheet" href="../style1.css" type="text/css">
     <link rel="stylesheet" href="../style2.css" type="text/css">
     <link rel="stylesheet" href="../style3.css" type="text/css">
+    <script src="../response.js"></script>
+
 
 </head>
 <body>
@@ -60,7 +62,7 @@
         <div class="grid-container-right">
             <div class="signupform">
                 <!--register form-->
-                <form class="text-center border border-light p-5" action="../../phpfile/signup.php" method="post">
+                <form class="text-center border border-light p-5" onsubmit= "return validateRegistration()" action="../../phpfile/signup.php" method="post">
 
                     <p class="h4 mb-4">Add an Admin</p>
                     <hr>
@@ -68,32 +70,38 @@
                         <div class="col">
                             <!-- First name -->
                             <input type="text" id="FirstName" name="fname" class="form-control" placeholder="First name">
+                            <div class="error" id="error-fn"></div>
                         </div>
                         <div class="col">
                             <!-- Last name -->
                             <input type="text" id="LastName" name="lname" class="form-control" placeholder="Last name">
+                            <div class="error" id="error-ln"></div>
                         </div>
                     </div>
                     <div class="form-control1">
                         <!-- Username -->
                         <input type="text" id="username" name="uname" class="form-control mb-4" placeholder="Username">
-
+                        <div class="error" id="error-usr"></div>
 
                         <!-- Password -->
                         <input type="password" id="FormPassword" name="pword" class="form-control mb-4" placeholder="Password" aria-describedby="FormPasswordHelpBlock">
+                       <div class="error" id="error-pswd"></div>
                         <!--                        <small id="FormPasswordHelpBlock" class="form-text text-muted mb-4">-->
                         <!--                            At least 8 characters and 1 digit-->
                         <!--                        </small>-->
                         <br>
-                        <select class="mb-4" name="sex" id="formGender">
+                        <select class="mb-4" id="gender" name="sex" id="formGender">
                             <option value="" disabled selected hidden>Select Your Gender</option>
                             <option value="male">Male</option>
                             <option value="female">Female</option>
                         </select><br>
+                        <div class="error" id="error-gnd"></div>
                         <input class="form-control mb-4" id="DoB" name="birth" type="date">
+                        <div class="error" id="error-birth"></div>
                         <!-- Role Played -->
                         <input type="text" name="role" id="rolePlayed" class="form-control mb-4" placeholder="Role played" aria-describedby="FormPhoneHelpBlock">
                         <br>
+                        <div class="error" id="error-rol"></div>
                         <button class="btn my-4" type="submit" name="regAdmin">Send</button>
                     </div>
 

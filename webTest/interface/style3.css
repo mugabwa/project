@@ -680,3 +680,11 @@ body{
 .btn-primary{
     width: 15%;
 }
+
+.error{
+    color: red;
+    margin-left: 5px;
+}
+label.error{
+    display: inline;
+}

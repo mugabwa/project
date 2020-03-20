@@ -17,6 +17,8 @@ if(!empty($_SESSION["userId"])){
     <link rel="stylesheet" href="../style1.css" type="text/css">
     <link rel="stylesheet" href="../style2.css" type="text/css">
     <link rel="stylesheet" href="../style3.css" type="text/css">
+    <script src="../response.js"></script>
+
 
 </head>
 <body>
@@ -70,7 +72,7 @@ if(!empty($_SESSION["userId"])){
             <?php
             if(isset($_SESSION["errorMessage"])) {
                 ?>
-                <div class="error-message">
+                <div class="error-message error" >
                     <?php
                     echo $_SESSION["errorMessage"];
                     ?>
@@ -79,14 +81,16 @@ if(!empty($_SESSION["userId"])){
                 unset($_SESSION["errorMessage"]);
             }
             ?>
-            <form method="post" action="../../phpfile/signup.php">
+            <form method="post" onsubmit="return validateLogin()" action="../../phpfile/signup.php">
                 <div class="form-group">
                     <label for="username">Username</label>
                     <input type="text" name="uname" id="username" class="form-control" placeholder="Username">
+                    <div id="error-usr"></div>
                 </div>
                 <div class="form-group">
                     <label for="passwd">Password</label>
                     <input type="password" name="pass" id="passwd" class="form-control" placeholder="Password">
+                    <div id="error-pwd"></div>
                 </div>
                 <div class="form-group">
                     <input class="btn btn-primary" type="submit" name="login" value="SUBMIT">

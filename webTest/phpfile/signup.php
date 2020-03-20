@@ -77,7 +77,7 @@ if (isset($_POST['logout'])){
 }
 
 //    login handler
-if(!empty($_POST['parenLogin'])) {
+if(isset($_POST['parentLogin'])) {
     session_start();
     $_SESSION["type"] = "Parent";
     $username = filter_var($_POST['uname'],FILTER_SANITIZE_STRING);

@@ -152,10 +152,10 @@ function studentDetails($streamLink){
     return $connection->select($query,"i",array($streamLink));
 }
 
-function studentResults(){
+function studentIdintity($id){
     global $connection;
-    $query = "SELECT * FROM student_info;";
-    return $connection->select($query);
+    $query = "SELECT studentID,firstName,lastName FROM student_info WHERE ParentID = ?;";
+    return $connection->select($query,"i",array($id));
 }
 
 function examInfo(){
