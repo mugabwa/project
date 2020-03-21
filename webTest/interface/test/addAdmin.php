@@ -62,46 +62,46 @@
         <div class="grid-container-right">
             <div class="signupform">
                 <!--register form-->
-                <form class="text-center border border-light p-5" onsubmit= "return validateRegistration()" action="../../phpfile/signup.php" method="post">
+                <form action="../../phpfile/signup.php" class="text-center border border-light p-5"
+                      method="post" onsubmit="return validateRegistration()">
 
                     <p class="h4 mb-4">Add an Admin</p>
                     <hr>
                     <div class="form-row mb-4">
                         <div class="col">
                             <!-- First name -->
-                            <input type="text" id="FirstName" name="fname" class="form-control" placeholder="First name">
+                            <input class="form-control" id="FirstName" name="fname" placeholder="First name" type="text">
                             <div class="error" id="error-fn"></div>
                         </div>
                         <div class="col">
                             <!-- Last name -->
-                            <input type="text" id="LastName" name="lname" class="form-control" placeholder="Last name">
+                            <input class="form-control" id="LastName" name="lname" placeholder="Last name" type="text">
                             <div class="error" id="error-ln"></div>
                         </div>
                     </div>
                     <div class="form-control1">
                         <!-- Username -->
-                        <input type="text" id="username" name="uname" class="form-control mb-4" placeholder="Username">
-                        <div class="error" id="error-usr"></div>
+                        <input type="text" id="username" name="uname" class="form-control" placeholder="Username">
+                        <div class="error mb-4" id="error-usr"></div>
 
                         <!-- Password -->
-                        <input type="password" id="FormPassword" name="pword" class="form-control mb-4" placeholder="Password" aria-describedby="FormPasswordHelpBlock">
-                       <div class="error" id="error-pswd"></div>
+                        <input type="password" id="FormPassword" name="pword" class="form-control" placeholder="Password" aria-describedby="FormPasswordHelpBlock">
+                       <div class="error mb-4" id="error-pswd"></div>
                         <!--                        <small id="FormPasswordHelpBlock" class="form-text text-muted mb-4">-->
                         <!--                            At least 8 characters and 1 digit-->
                         <!--                        </small>-->
-                        <br>
-                        <select class="mb-4" id="gender" name="sex" id="formGender">
+                        <select id="gender" name="sex" id="formGender">
                             <option value="" disabled selected hidden>Select Your Gender</option>
                             <option value="male">Male</option>
                             <option value="female">Female</option>
-                        </select><br>
-                        <div class="error" id="error-gnd"></div>
-                        <input class="form-control mb-4" id="DoB" name="birth" type="date">
-                        <div class="error" id="error-birth"></div>
+                        </select>
+                        <div class="error mb-4" id="error-gnd"></div>
+                        <input class="form-control" id="DoB" name="birth" type="date">
+                        <div class="error mb-4" id="error-birth"></div>
                         <!-- Role Played -->
-                        <input type="text" name="role" id="rolePlayed" class="form-control mb-4" placeholder="Role played" aria-describedby="FormPhoneHelpBlock">
-                        <br>
-                        <div class="error" id="error-rol"></div>
+                        <input type="text" name="role" id="rolePlayed" class="form-control" placeholder="Role played" aria-describedby="FormPhoneHelpBlock">
+                        <div class="error mb-4" id="error-rol"></div>
+<!--                        Submit button-->
                         <button class="btn my-4" type="submit" name="regAdmin">Send</button>
                     </div>
 
