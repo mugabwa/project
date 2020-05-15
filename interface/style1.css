@@ -1,0 +1,86 @@
+
+.grid-container{
+    /*border: 1px solid red;*/
+    min-height: 700px;
+    width: 100%;
+    display: grid;
+    grid-template-rows: 60px auto 60px;
+    overflow: hidden;
+}
+.grid-container-nav-top{
+    /*border: 1px solid #17a2b8;*/
+    display: grid;
+    grid-template-columns: 10% 90%;
+    background: #1b1e21;
+    /*position: fixed;*/
+    top: 0;
+    width: 100%;
+    z-index: 1;
+    height: 60px;
+}
+.grid-container-nav-bottom{
+    /*border: 1px solid #3d39b8;*/
+    display: grid;
+    grid-template-columns: 15% 85%;
+    position: relative;
+    z-index: 0;
+    top: 0;
+    height: calc(85vh + 10px);
+    /*overflow: auto;*/
+}
+.grid-container-nav-bottom2{
+    /*border: 1px solid #3d39b8;*/
+    display: grid;
+    position: relative;
+    z-index: 0;
+    top: 0;
+    height: calc(85vh + 10px);
+    justify-content: center;
+}
+.grid-container-nav-bottom1{
+    /*border: 1px solid #3d39b8;*/
+    display: grid;
+    grid-template-columns: 80% 20%;
+}
+.grid-container-footer{
+    /*border: 1px solid yellow;*/
+    background: #b9bbbe;
+    /*position: absolute;*/
+    bottom: 0;
+    /*width: 100%;*/
+    z-index: 1;
+}
+.grid-container-left
+{
+    height: 100%;
+    /*border: 1px solid green;*/
+    /*background-image: url("resources/images/city-chicago.jpg");*/
+    display: grid;
+    grid-template-rows: 30% 70%;
+}
+.grid-container-left-top{
+    /*border: 1px solid #0b2e13;*/
+}
+.grid-container-left-bottom{
+    /*border: 1px solid #34ce57;*/
+}
+.grid-container-right {
+    height: 100%;
+    /*border: 1px solid green;*/
+    overflow: auto;
+    max-height: 700px;
+}
+.grid-container-nav-top-logo{
+    /*border: 1px solid palevioletred;*/
+}
+.grid-container-nav-top-menu{
+    /*border: 1px solid peru;*/
+}
+.extented1{
+    grid-template-columns: 30% 70% !important;
+    margin-left: 20px;
+}
+.extented{
+    padding-left: 20px;
+    padding-right: 20px;
+}
